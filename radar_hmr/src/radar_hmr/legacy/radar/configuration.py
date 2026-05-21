@@ -1,0 +1,62 @@
+import numpy as np
+
+NUM_TX = 3
+NUM_RX = 4
+
+START_FREQ = 77
+ADC_START_TIME = 6
+
+FREQ_SLOPE = 48
+ADC_SAMPLES = 256
+SAMPLE_RATE = 8000
+
+RX_GAIN = 30
+
+IDLE_TIME = 7
+RAMP_END_TIME = 65
+
+NUM_FRAMES = 32
+LOOPS_PER_FRAME = 60
+
+NUM_DOPPLER_BINS = LOOPS_PER_FRAME
+NUM_RANGE_BINS = ADC_SAMPLES
+NUM_ANGLE_BINS = 64
+
+RANGE_RESOLUTION = (
+    3e8 * SAMPLE_RATE * 1e3
+) / (
+    2 * FREQ_SLOPE * 1e12 * ADC_SAMPLES
+)
+
+MAX_RANGE = (
+    300 * SAMPLE_RATE
+) / (
+    2 * FREQ_SLOPE * 1e3
+)
+
+DOPPLER_RESOLUTION = (
+    3e8
+) / (
+    2
+    * START_FREQ
+    * 1e9
+    * (IDLE_TIME + RAMP_END_TIME)
+    * 1e-6
+    * NUM_DOPPLER_BINS
+    * NUM_TX
+)
+
+MAX_DOPPLER = (
+    3e8
+) / (
+    4
+    * START_FREQ
+    * 1e9
+    * (IDLE_TIME + RAMP_END_TIME)
+    * 1e-6
+    * NUM_TX
+)
+
+MMWAVE_RADAR_LOC = np.array([
+    [0.0, 0.0, 0.0]
+])
